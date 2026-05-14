@@ -2,10 +2,10 @@ const mongoose = require('mongoose')
 
 const userSchema = mongoose.Schema({
     name:{type:String},
-    email:{type:String, required:true},
-    mobile_number:{type:String, required:true},
+    email:{type:String, required:true, unique:true},
+    mobile_number:{type:String, required:true, unique:true},
     dob:{type:String},
-    aadhar_number:{type:Number},
+    aadhar_number:{type:Number, unique:true},
     isAadharVerified:{type:Boolean, default:false},
     address: {
         vill:{type:String},

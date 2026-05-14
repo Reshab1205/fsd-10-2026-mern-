@@ -1,12 +1,10 @@
 const express = require('express')
-const mongoose  = require('mongoose')
 const connectDb = require('./middlewares/dB')
-// const userController = require('./controllers/userController')
+const app = express()
 
 const userRoutes = require('./routes/userRoutes')
 
 
-const app = express()
 
 app.use(express.json())
 connectDb()
