@@ -44,13 +44,25 @@ const login = async (req, res) => {
 
 const fetchUsers = async (req, res) => {
   try {
+    const data = await user.find()
+    return res.status(200).json({ message: "Users fetched Successfully", users:data});
+
   } catch (err) {
-    console.log(err);
+    return res.status(500).json({message: 'Internal Server Error'})
   }
 };
 
 const updateUser = async (req, res) => {
   try {
+    const id = req.params.id
+    console.log(id)
+    const inputData = req.body
+    const data = await user.findByIdAndUpdate(id, inputData, {
+      new:true
+    })
+    // console.log(data)
+    
+    return res.status(200).json({ message: "Data fetched Successfully", updated:data});
   } catch (err) {
     console.log(err);
   }

@@ -19,4 +19,4 @@ const userSchema = mongoose.Schema({
     isActive:{type:String, enum:["Active", "Inactive", "Blocked"]}
 })
 
-module.exports = mongoose.model('user', userSchema)
+module.exports =  mongoose.model('user', userSchema)
