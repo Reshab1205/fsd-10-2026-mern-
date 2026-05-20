@@ -3,6 +3,7 @@ const connectDb = require('./middlewares/dB')
 const app = express()
 
 const userRoutes = require('./routes/userRoutes')
+const productRoutes = require('./routes/productRoutes')
 
 
 
@@ -12,6 +13,7 @@ connectDb()
 
 // User Routes
 app.use('/user', userRoutes)
+app.use('/product', productRoutes)
 
 //Product Routes
 // app.use('/product',)

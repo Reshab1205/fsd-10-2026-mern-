@@ -57,21 +57,31 @@ const updateUser = async (req, res) => {
     const id = req.params.id
     console.log(id)
     const inputData = req.body
+    if(Object.keys(inputData).length === 0) {
+      return res.status(404).json({message: 'Provide Details to Update'})
+    }
     const data = await user.findByIdAndUpdate(id, inputData, {
       new:true
     })
-    // console.log(data)
-    
-    return res.status(200).json({ message: "Data fetched Successfully", updated:data});
+    if(!data) {
+          return res.status(404).json({message: 'User Not Found'})
+    }    
+    return res.status(200).json({ message: "Data Updated Successfully", updated:data});
   } catch (err) {
-    console.log(err);
+    return res.status(500).json({message: 'Internal Server Error'})
   }
 };
 
 const deleteUser = async (req, res) => {
   try {
+    const id = req.params.id
+    const data = await user.findByIdAndDelete(id)
+    if(!data) {
+          return res.status(404).json({message: 'User Not Found'})
+    } 
+        return res.status(200).json({ message: "Deleted Successfully"});
   } catch (err) {
-    console.log(err);
+    return res.status(500).json({message: 'Internal Server Error'})
   }
 };
 
