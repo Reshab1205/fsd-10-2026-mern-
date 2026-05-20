@@ -1,6 +1,10 @@
 const mongoose = require('mongoose')
+ const { configDotenv } =  require('dotenv')
 
-const url = `mongodb+srv://fsd10:fsd10@cluster0.tmtxvxf.mongodb.net/FSD10?appName=Cluster0`
+ configDotenv()
+
+
+const url = process.env.DB_URL
 
 const connectDb = async () => {
     try{
