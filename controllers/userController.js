@@ -1,5 +1,9 @@
 const express = require("express");
+const jwt = require('jsonwebtoken')
 const user = require("../models/userModel");
+
+const { configDotenv } = require('dotenv')
+configDotenv()
 
 const register = async (req, res) => {
   try {
@@ -36,7 +40,14 @@ const login = async (req, res) => {
     if(!(emailExist.password === inputData.password)) {
       return res.status(404).json({ message: "Wrong Credentials" });
     }
-    return res.status(200).json({ message: "Login Successfully"});
+    const token = jwt.sign(
+      {email:emailExist.email, id:emailExist._id},
+      process.env.SECRET_KEY,
+      {expiresIn: '24h'}
+    )
+  //  const data =  jwt.verify(token, process.env.SECRET_KEY)
+  //  console.log(data)
+    return res.status(200).json({ message: "Login Successfully", token: token});
   } catch (err) {
     return res.status(500).json({message: 'Internal Server Error'})
   }
